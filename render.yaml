@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: books-api
+    env: go
+    buildCommand: go build -o main .
+    startCommand: ./main
+    envVars:
+      - key: GIN_MODE
+        value: release
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        fromDatabase:
+          name: books-db
+          property: connectionString
+    
+  - type: pserv
+    name: books-db
+    env: postgresql
+    plan: free
+    databaseName: books
+    databaseUser: books_user

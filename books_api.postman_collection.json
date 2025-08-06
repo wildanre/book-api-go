@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "Books API CRUD",
+    "_postman_id": "abcd1234-5678-90ef-ghij-klmnopqrstuv",
+    "description": "Postman collection untuk CRUD API Buku (Gin + GORM)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Swagger Documentation",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/swagger/index.html",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["swagger", "index.html"]
+        }
+      }
+    },
+    {
+      "name": "Create Book (v1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Belajar Golang\",\n  \"author\": \"Danu\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "books"]
+        }
+      }
+    },
+    {
+      "name": "Create Book (Legacy)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Belajar Golang\",\n  \"author\": \"Danu\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "Get All Books (v1)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/api/v1/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "books"]
+        }
+      }
+    },
+    {
+      "name": "Get Book by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["books", "1"]
+        }
+      }
+    },
+    {
+      "name": "Update Book",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Belajar Go Lanjut\",\n  \"author\": \"Danu Stephen\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["books", "1"]
+        }
+      }
+    },
+    {
+      "name": "Delete Book",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8080/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["books", "1"]
+        }
+      }
+    }
+  ]
+}
