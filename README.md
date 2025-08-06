@@ -1,8 +1,13 @@
-# Books API - Refactored
+# Books API - Go Gin CRUD Application
 
-Sebuah REST API sederhana untuk manajemen buku menggunakan Go, Gin, GORM, dan PostgreSQL.
+A RESTful API for managing books built with Go, Gin, GORM, and PostgreSQL.
 
-## 🏗️ Arsitektur
+## 🚀 Live Demo
+
+**Production URL:** `https://your-app-name.onrender.com`
+**Swagger Documentation:** `https://your-app-name.onrender.com/swagger/index.html`
+
+## 🚀 Features
 
 Aplikasi ini telah direfactor dengan arsitektur yang lebih terstruktur:
 
