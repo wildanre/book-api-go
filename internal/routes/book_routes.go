@@ -10,10 +10,10 @@ import (
 func SetupBookRoutes(router *gin.Engine) {
 	bookHandler := handlers.NewBookHandler()
 
-	// Group routes with /api/v1 prefix
-	v1 := router.Group("/api/v1")
+	// Group routes with /api prefix
+	api := router.Group("/api")
 	{
-		books := v1.Group("/books")
+		books := api.Group("/books")
 		{
 			books.POST("", bookHandler.CreateBook)
 			books.GET("", bookHandler.GetBooks)
@@ -22,11 +22,4 @@ func SetupBookRoutes(router *gin.Engine) {
 			books.DELETE("/:id", bookHandler.DeleteBook)
 		}
 	}
-
-	// Keep old routes for backward compatibility
-	router.POST("/books", bookHandler.CreateBook)
-	router.GET("/books", bookHandler.GetBooks)
-	router.GET("/books/:id", bookHandler.GetBookByID)
-	router.PUT("/books/:id", bookHandler.UpdateBook)
-	router.DELETE("/books/:id", bookHandler.DeleteBook)
 }

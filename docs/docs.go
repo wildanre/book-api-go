@@ -326,7 +326,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "book-api-go.zeabur.app",
-	BasePath:         "/api/v1",
+	BasePath:         "/api",
 	Schemes:          []string{"https", "http"},
 	Title:            "Books API",
 	Description:      "This is a simple CRUD API for managing books",

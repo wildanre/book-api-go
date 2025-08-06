@@ -14,7 +14,7 @@
         "version": "1.0"
     },
     "host": "book-api-go.zeabur.app",
-    "basePath": "/api/v1",
+    "basePath": "/api",
     "paths": {
         "/books": {
             "get": {

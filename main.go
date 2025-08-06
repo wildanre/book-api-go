@@ -4,7 +4,7 @@
 // @contact.name API Support
 // @contact.email support@example.com
 // @host book-api-go.zeabur.app
-// @BasePath /api/v1
+// @BasePath /api
 // @schemes https http
 package main
 
@@ -69,14 +69,14 @@ func main() {
 		})
 	})
 
-	// API v1 group
-	v1 := r.Group("/api/v1")
+	// API group
+	api := r.Group("/api")
 	{
-		// Health check endpoint under API v1
-		v1.GET("/health", func(c *gin.Context) {
+		// Health check endpoint under API
+		api.GET("/health", func(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"status":     "ok",
-				"message":    "Books API v1 is running",
+				"message":    "Books API is running",
 				"version":    "1.0.0",
 				"go_version": runtime.Version(),
 			})
