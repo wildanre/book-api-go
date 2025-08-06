@@ -1,4 +1,4 @@
-basePath: /
+basePath: /api/v1
 definitions:
   handlers.ErrorResponse:
     properties:
@@ -39,7 +39,7 @@ definitions:
     - author
     - title
     type: object
-host: localhost:8080
+host: book-api-go.zeabur.app
 info:
   contact:
     email: support@example.com
@@ -48,146 +48,22 @@ info:
   title: Books API
   version: "1.0"
 paths:
-  /api/v1/books:
-    get:
-      description: Get all books from the database
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.SuccessResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-      summary: Get all books
-      tags:
-      - books
-    post:
-      consumes:
-      - application/json
-      description: Create a new book with title and author
-      parameters:
-      - description: Book data
-        in: body
-        name: book
-        required: true
-        schema:
-          $ref: '#/definitions/models.CreateBookRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/handlers.SuccessResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-      summary: Create a new book
-      tags:
-      - books
-  /api/v1/books/{id}:
-    delete:
-      description: Delete a book by its ID
-      parameters:
-      - description: Book ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.SuccessResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-      summary: Delete book
-      tags:
-      - books
-    get:
-      description: Get a single book by its ID
-      parameters:
-      - description: Book ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.SuccessResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-      summary: Get book by ID
-      tags:
-      - books
-    put:
-      consumes:
-      - application/json
-      description: Update an existing book by ID
-      parameters:
-      - description: Book ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Updated book data
-        in: body
-        name: book
-        required: true
-        schema:
-          $ref: '#/definitions/models.UpdateBookRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.SuccessResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
-      summary: Update book
-      tags:
-      - books
   /books:
     get:
-      description: Get all books from the database
+      consumes:
+      - application/json
+      description: Get a list of all books with optional pagination
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
       produces:
       - application/json
       responses:
@@ -233,7 +109,9 @@ paths:
       - books
   /books/{id}:
     delete:
-      description: Delete a book by its ID
+      consumes:
+      - application/json
+      description: Delete a book by ID
       parameters:
       - description: Book ID
         in: path
@@ -247,6 +125,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handlers.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
@@ -259,7 +141,9 @@ paths:
       tags:
       - books
     get:
-      description: Get a single book by its ID
+      consumes:
+      - application/json
+      description: Get a book by its ID
       parameters:
       - description: Book ID
         in: path
@@ -273,6 +157,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handlers.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
@@ -323,5 +211,6 @@ paths:
       tags:
       - books
 schemes:
+- https
 - http
 swagger: "2.0"

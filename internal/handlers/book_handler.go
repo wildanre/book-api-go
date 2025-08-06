@@ -45,7 +45,6 @@ type SuccessResponse struct {
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /books [post]
-// @Router /api/v1/books [post]
 func (h *BookHandler) CreateBook(c *gin.Context) {
 	var req models.CreateBookRequest
 
@@ -80,13 +79,15 @@ func (h *BookHandler) CreateBook(c *gin.Context) {
 
 // GetBooks retrieves all books
 // @Summary Get all books
-// @Description Get all books from the database
+// @Description Get a list of all books with optional pagination
 // @Tags books
+// @Accept json
 // @Produce json
+// @Param page query int false "Page number" default(1)
+// @Param limit query int false "Items per page" default(10)
 // @Success 200 {object} SuccessResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /books [get]
-// @Router /api/v1/books [get]
 func (h *BookHandler) GetBooks(c *gin.Context) {
 	books, err := h.bookService.GetAllBooks()
 	if err != nil {
@@ -104,15 +105,16 @@ func (h *BookHandler) GetBooks(c *gin.Context) {
 
 // GetBookByID retrieves a book by ID
 // @Summary Get book by ID
-// @Description Get a single book by its ID
+// @Description Get a book by its ID
 // @Tags books
+// @Accept json
 // @Produce json
 // @Param id path int true "Book ID"
 // @Success 200 {object} SuccessResponse
+// @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /books/{id} [get]
-// @Router /api/v1/books/{id} [get]
 func (h *BookHandler) GetBookByID(c *gin.Context) {
 	id := c.Param("id")
 
@@ -150,7 +152,6 @@ func (h *BookHandler) GetBookByID(c *gin.Context) {
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /books/{id} [put]
-// @Router /api/v1/books/{id} [put]
 func (h *BookHandler) UpdateBook(c *gin.Context) {
 	id := c.Param("id")
 	var req models.UpdateBookRequest
@@ -193,15 +194,16 @@ func (h *BookHandler) UpdateBook(c *gin.Context) {
 
 // DeleteBook deletes a book by ID
 // @Summary Delete book
-// @Description Delete a book by its ID
+// @Description Delete a book by ID
 // @Tags books
+// @Accept json
 // @Produce json
 // @Param id path int true "Book ID"
 // @Success 200 {object} SuccessResponse
+// @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /books/{id} [delete]
-// @Router /api/v1/books/{id} [delete]
 func (h *BookHandler) DeleteBook(c *gin.Context) {
 	id := c.Param("id")
 

@@ -3,9 +3,9 @@
 // @description This is a simple CRUD API for managing books
 // @contact.name API Support
 // @contact.email support@example.com
-// @host localhost:8080
-// @BasePath /
-// @schemes http
+// @host book-api-go.zeabur.app
+// @BasePath /api/v1
+// @schemes https http
 package main
 
 import (
@@ -59,7 +59,7 @@ func main() {
 	r.Use(middleware.Recovery())
 	r.Use(middleware.CORS())
 
-	// Health check endpoint
+	// Health check endpoint (root level for basic monitoring)
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"status":     "ok",
@@ -68,6 +68,20 @@ func main() {
 			"go_version": runtime.Version(),
 		})
 	})
+
+	// API v1 group
+	v1 := r.Group("/api/v1")
+	{
+		// Health check endpoint under API v1
+		v1.GET("/health", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"status":     "ok",
+				"message":    "Books API v1 is running",
+				"version":    "1.0.0",
+				"go_version": runtime.Version(),
+			})
+		})
+	}
 
 	// Swagger documentation
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
