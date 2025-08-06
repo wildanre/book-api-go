@@ -13,11 +13,11 @@ import (
 	"os"
 	"runtime"
 
+	_ "example/go1/docs" // Import for swagger docs
 	"example/go1/internal/database"
 	"example/go1/internal/middleware"
 	"example/go1/internal/models"
 	"example/go1/internal/routes"
-	_ "example/go1/docs" // Import for swagger docs
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
