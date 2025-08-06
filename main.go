@@ -26,10 +26,10 @@ import (
 )
 
 func main() {
-	// Load environment variables dari file .env
+	// Load environment variables dari file .env (optional untuk development)
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("No .env file found, using system environment variables")
 	}
 
 	// Connect to database

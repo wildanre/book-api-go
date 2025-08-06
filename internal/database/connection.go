@@ -15,8 +15,11 @@ var DB *gorm.DB
 func Connect() error {
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
+		log.Println("DATABASE_URL environment variable not found")
 		log.Fatal("DATABASE_URL environment variable is required")
 	}
+
+	log.Printf("Attempting to connect to database...")
 
 	// Configure GORM logger
 	newLogger := logger.New(
@@ -31,6 +34,7 @@ func Connect() error {
 		Logger: newLogger,
 	})
 	if err != nil {
+		log.Printf("Failed to connect to database: %v", err)
 		return err
 	}
 
