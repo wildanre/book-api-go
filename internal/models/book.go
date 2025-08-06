@@ -18,12 +18,12 @@ type Book struct {
 
 // CreateBookRequest represents the request payload for creating a book
 type CreateBookRequest struct {
-	Title  string `json:"title" validate:"required,min=1,max=255"`
-	Author string `json:"author" validate:"required,min=1,max=255"`
+	Title  string `json:"title" validate:"required,min=1,max=255" binding:"required"`
+	Author string `json:"author" validate:"required,min=1,max=255" binding:"required"`
 }
 
 // UpdateBookRequest represents the request payload for updating a book
 type UpdateBookRequest struct {
-	Title  string `json:"title" validate:"required,min=1,max=255"`
-	Author string `json:"author" validate:"required,min=1,max=255"`
+	Title  string `json:"title" validate:"required,min=1,max=255" binding:"required"`
+	Author string `json:"author" validate:"required,min=1,max=255" binding:"required"`
 }

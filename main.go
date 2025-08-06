@@ -58,6 +58,7 @@ func main() {
 	r.Use(middleware.Logger())
 	r.Use(middleware.Recovery())
 	r.Use(middleware.CORS())
+	r.Use(middleware.SecurityHeaders())
 
 	// Health check endpoint (root level for basic monitoring)
 	r.GET("/health", func(c *gin.Context) {
